@@ -58,7 +58,7 @@ double BisecYTM(double FV, double c, double PV, double N, double d, double a, do
 	cout << "Enter Face Value (FV): ";
 	cin >> FV;
 
-    cout << "Enter Price of the Bond: ";
+    cout << "Enter Price of the Bond (PV): ";
 	cin >> PV;
 
 	cout << "Enter the number of full years until maturity (N): ";
@@ -73,7 +73,7 @@ double BisecYTM(double FV, double c, double PV, double N, double d, double a, do
    }
 
       if (PV==FV){
-    cout<<"bond’s price is equal to its par (face) value!"<<endl;;
+    cout<<"This bond is at par, YTM = coupon rate c"<<endl;;
   }
   
             double a= 0.000001;
