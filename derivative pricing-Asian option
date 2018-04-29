@@ -1,0 +1,30 @@
+import scipy as sp
+
+def asianOptionMC(s0, k, t, r, sigma, simulation_num, observation_num):
+
+	dt=t/observation_num
+	call=sp.zeros([simulation_num], dtype=float)
+
+	for j in range(0, simulation_num):
+	    price_per_observation = s0
+	    price_total = 0
+	    for i in range(0,int(observation_num)):
+	        e = sp.random.normal()
+	        price_per_observation *= sp.exp((r-0.5*sigma*sigma) * dt + sigma * e * sp.sqrt(dt))
+	        price_total += price_per_observation
+	    price_average = price_total / observation_num
+	    call[j] = max(price_average - k,0)
+	call_price= sp.mean(call) * sp.exp(-r*t)
+
+	print ('Asian Prices using Monte Carlo (Arithmetic) = ', round(call_price,3))
+
+if __name__ == '__main__':
+	s0=100. 					# stock value
+	k=100. 						# exercise price = k
+	t=3 						# time to maturity (years)
+	r=0.05 						# risk-free rate
+	sigma=0.3 					# volatility
+	simulation_num=1000 		# number of simulations
+	observation_num=50. 		# number of observations
+
+	asianOptionMC(s0, k, t, r, sigma, simulation_num, observation_num)
